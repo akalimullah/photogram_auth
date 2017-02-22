@@ -1,10 +1,9 @@
 <div class="page-header">
   <h1>
-    Photos
+    My Liked Photos
   </h1>
-  <a href="/photos/new" class="btn btn-lg btn-success"><i class="fa fa-plus"></i> New Photo</a>
 </div>
-<% @photos.each do |photo| %>
+<% @liked_photos.each do |photo| %>
 <div class="row">
   <div class="col-md-12">
     <div class="panel panel-default">
@@ -13,19 +12,6 @@
       </div>
       <div class="panel-body">
         <img class="img-responsive" src="<%= photo.image %>">
-        <% if photo.likes.find_by(:user_id => current_user.id) == nil %>
-        <form action="/create_like" method="post">
-          <!-- Hidden input for authenticity token to protect from forgery -->
-          <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-        <input name="photo_id" value="<%= photo.id %>" type="hidden">
-        <input name="user_id" value="<%= current_user.id %>" type="hidden">
-        <button class="btn btn-link">
-        <i class="fa fa-heart-o"></i>
-        </button>
-        </form>
-        <% else %>
-        <a href="/delete_like/<%= photo.likes.find_by(:user_id => current_user.id).id %>"<i class="fa fa-heart"></i>
-        <% end %>
         <p><%= photo.caption %></p>
         <ul class="list-group">
           <% photo.comments.each do |comment| %>

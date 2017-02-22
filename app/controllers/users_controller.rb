@@ -11,6 +11,12 @@ class UsersController < ApplicationController
 
     render("users/show.html.erb")
   end
+
+  def show_liked_photos
+    @liked_photos = current_user.liked_photos
+
+    render("users/show_liked_photos.html.erb")
+  end
   #
   # def new
   #   @user = User.new
